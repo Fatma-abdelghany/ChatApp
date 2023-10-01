@@ -12,11 +12,12 @@ class ChatDetails extends StatefulWidget {
 class _ChatDetailsState extends State<ChatDetails> {
   List<ChatMessages> chatMessageList= [
     ChatMessages(message: "ehhhh, doing OK.", messageType: "receiver"),
+    ChatMessages(message: "Hey Fatma, I am doing fine dude. wbu?.", messageType: "sender"),
     ChatMessages(message: "How have you been?", messageType: "receiver"),
     ChatMessages(message: "Is there any thing wrong?", messageType: "sender"),
 
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +55,22 @@ class _ChatDetailsState extends State<ChatDetails> {
       ),
       body: Stack(
         children: [
+          ListView.builder(
+              itemCount: chatMessageList.length,
+              itemBuilder:(BuildContext context, int index){
+                return Align(
+                  alignment:(chatMessageList[index].messageType=="receiver")? Alignment.topLeft:Alignment.topRight,
+                  child: Container(
+                    margin: EdgeInsets.all(15),
+                    padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: (chatMessageList[index].messageType=="receiver")? Colors.grey.shade200 :Colors.blue[200]
+                      ),
+                      child: Text(chatMessageList[index].message)),
+                ) ;
+              }
+          ),
 
 
 
